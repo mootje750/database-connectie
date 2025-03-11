@@ -31,7 +31,7 @@ $producten = $stmt->fetchAll();
     <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Product code</th>
                 <th>Product Naam</th>
                 <th>Prijs per Stuk</th>
                 <th>Omschrijving</th>
@@ -40,7 +40,7 @@ $producten = $stmt->fetchAll();
         <tbody>
             <?php foreach ($producten as $product): ?>
                 <tr>
-                    <td><?php echo isset($product['id']) ? htmlspecialchars($product['id']) : 'N/A'; ?></td>
+                    <td><?php echo isset($product['product_code']) ? htmlspecialchars($product['product_code']) : 'N/A'; ?></td>
                     <td><?php echo isset($product['product_naam']) ? htmlspecialchars($product['product_naam']) : 'N/A'; ?></td>
                     <td><?php echo isset($product['prijs_per_stuk']) ? htmlspecialchars($product['prijs_per_stuk']) : 'N/A'; ?></td>
                     <td><?php echo isset($product['omschrijving']) ? htmlspecialchars($product['omschrijving']) : 'N/A'; ?></td>
