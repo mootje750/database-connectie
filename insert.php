@@ -1,5 +1,4 @@
 <?php
-
 require 'db.php';
 
 if (isset($_POST['knop'])) {
@@ -7,22 +6,22 @@ if (isset($_POST['knop'])) {
     $prijs_per_stuk = $_POST['prijs_per_stuk'];
     $omschrijving = $_POST['omschrijving'];
 
-    $query= "INSERT INTO Producten (product_naam, prijs_per_stuk, omschrijving) VALUES (:product_naam, :prijs_per_stuk, :omschrijving)";
-    $result=$pdo->prepare($query);
-    $Winkel = [
-        "product_naam" => $product_naam,
-        "prijs_per_stuk" => $prijs_per_stuk,
-        "omschrijving" => $omschrijving
-    ];
-    $result->execute($Winkel);
-    if ($result) {
-        echo "Product is toegevoegd!";
-    } else {
-        echo "Er is iets fout gegaan";
-        die();
+    try {
+        $query = "INSERT INTO Producten (product_naam, prijs_per_stuk, omschrijving) 
+                  VALUES (:product_naam, :prijs_per_stuk, :omschrijving)";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([
+            "product_naam" => $product_naam,
+            "prijs_per_stuk" => $prijs_per_stuk,
+            "omschrijving" => $omschrijving
+        ]);
+
+        header("Location: select.php");
+        exit();
+    } catch (PDOException $e) {
+        echo "Fout bij het toevoegen: " . $e->getMessage();
     }
 }
-
 ?>
 
 
